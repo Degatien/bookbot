@@ -3,7 +3,15 @@ def main():
     text = get_book_text(book_path)
     num_words = get_num_words(text)
     chars_dict = get_chars_dict(text)
-    print(chars_dict)
+    chars_dict_list = [{"char": char, "count": count} for char, count in chars_dict.items()]
+
+    chars_dict_list.sort(key=sort_on, reverse=True)
+    print(chars_dict_list)
+    print(f"--- Begin report of {book_path} ---")
+    print(f"{num_words} words found in the document")
+    for char_dict in chars_dict_list:
+        print(f"The '{char_dict["char"]}' character was found {char_dict["count"]} times")
+    print("--- End report ---")
     
 def get_num_words(text):
     words = text.split()
@@ -23,6 +31,7 @@ def get_book_text(path):
     with open(path) as f:
         return f.read()
 
-
+def sort_on(dict):
+    return dict["count"]
 main()
 
