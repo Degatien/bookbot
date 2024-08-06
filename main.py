@@ -6,11 +6,14 @@ def main():
     chars_dict_list = [{"char": char, "count": count} for char, count in chars_dict.items()]
 
     chars_dict_list.sort(key=sort_on, reverse=True)
-    print(chars_dict_list)
     print(f"--- Begin report of {book_path} ---")
     print(f"{num_words} words found in the document")
     for char_dict in chars_dict_list:
-        print(f"The '{char_dict["char"]}' character was found {char_dict["count"]} times")
+        char = char_dict["char"]
+        count = char_dict["count"]
+        
+        if char.isalpha():
+            print(f"The '{char}' character was found {count} times")
     print("--- End report ---")
     
 def get_num_words(text):
